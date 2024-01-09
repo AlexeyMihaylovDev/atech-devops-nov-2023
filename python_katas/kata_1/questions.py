@@ -6,67 +6,36 @@ def sum_of_element(elements):
 
 
 def versing(word):
-    # 1 Kata
-    #
-    # Given a string 'word', if its length is at least 3, add 'ing' to its end.
-    # Unless it already ends in 'ing', in which case add 'ly' instead.
-    # If the string length is less than 3, leave it unchanged.
-    #
-    # e.g.
-    # teach -> teaching
-    # do -> do
-    # swimming -> swimmingly
-    #
-    # :param word: str
-    # :return: Return the resulting string.
-
-
-
-    return None
-
+    N=3
+    chek=''
+    if len(word) < 3:
+        result = word
+    elif len(word) > 2 :
+        while (N >0):
+            chek = chek + word[-N]
+            N = N -1
+        if chek == 'ing':
+            result = word + 'ly'
+        else:
+            result = word +'ing'
+    return result
 
 def words_concatenation(words):
-    """
-    1 Kata
-
-    Given a list of words, write a program that concatenates the words.
-
-    For example:
-    words_concatenation(['take', 'me', 'home']) returns 'take me home'
-
-    :param words: list of str
-    :return: Return the resulting string.
-    """
-    def words_concatenation(words):
-        """
-        1 Kata
-
-        Given a list of words, write a program that concatenates the words.
-
-        For example:
-        words_concatenation(['take', 'me', 'home']) returns 'take me home'
-
-        :param words: list of str
-        :return: Return the resulting string.
-        """
- 
-    return None
-
+    i = 0
+    result = ''
+    while i < len(words):
+        result = result + ' ' + words[i]
+        i += 1
+    return result
 
 def reverse_words_concatenation(words):
-    """
-    1 Kata
-
-    Given a list of words, write a program that concatenates the words in a reverse way
-
-    For example:
-    reverse_words_concatenation(['take', 'me', 'home']) returns 'home me take'
-
-    :param words: list of str
-    :return: Return the resulting string.
-    """
-    return None
-
+    i = 0
+    N = len(words)
+    result = ''
+    while N > 0:
+        result = result + ' ' + words[N-1]
+        N = N-1
+    return result
 
 def is_unique_string(some_str):
     for char in some_str:
