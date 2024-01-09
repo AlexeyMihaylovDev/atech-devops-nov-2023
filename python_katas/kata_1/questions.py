@@ -132,31 +132,17 @@ def bad_average(a, b, c):
 
     :return:
     """
-    return a + b + c / 3
 
+    return (a + b + c) / 3
 
 def best_student(grades):
-    """
-    1 Kata
+    maxgrade= list(grades.values())[0]
+    for name, grade in grades.items():
+        if grade > maxgrade:
+            maxgrade = grade
+            result = name
 
-    This function gets a dict of students -> grades mapping, and returns the student with the highest grade
-
-    e.g.
-    {
-        "Ben": 78,
-        "Hen": 88,
-        "Natan": 99,
-        "Efraim": 65,
-        "Rachel": 95
-    }
-
-    will return "Natan"
-
-    :param grades: dict of name -> grade mapping
-    :return: str. some key from the dict
-    """
-    return None
-
+    return  result
 
 def print_dict_as_table(some_dict):
     """
@@ -184,6 +170,12 @@ def print_dict_as_table(some_dict):
     :param some_dict:
     :return:
     """
+    print("{:<8} {:<10}".format('Key','Value'))
+    print("--------------")
+    for k, v in some_dict.items():
+        num = v
+        print("{:<8} {:<14}".format(k, num))
+
     return None
 
 
@@ -288,29 +280,29 @@ if __name__ == '__main__':
     #     }
     # ))
 
-    # print('\nbad_average:\n--------------------')
-    # print(bad_average(1, 2, 3))
+    #print('\nbad_average:\n--------------------')
+    #print(bad_average(1, 2, 3))
 
-    # print('\nbest_student:\n--------------------')
-    # print(best_student({
-    #     "Ben": 78,
-    #     "Hen": 88,
-    #     "Natan": 99,
-    #     "Efraim": 65,
-    #     "Rachel": 95
-    # }))
+    #  print('\nbest_student:\n--------------------')
+    #  print(best_student({
+    #      "Ben": 78,
+    #      "Hen": 88,
+    #      "Natan": 99,
+    #      "Efraim": 65,
+    #      "Rachel": 95
+    #  }))
 
-    # print('\nprint_dict_as_table:\n--------------------')
-    # print(print_dict_as_table({
-    #     "Ben": 78,
-    #     "Hen": 88,
-    #     "Natan": 99,
-    #     "Efraim": 65,
-    #     "Rachel": 95
-    # }))
+    print('\nprint_dict_as_table:\n--------------------')
+    print(print_dict_as_table({
+        "Ben": 78,
+        "Hen": 88,
+        "Natan": 99,
+        "Efraim": 65,
+        "Rachel": 95
+    }))
 
-    print('\nmerge_dicts:\n--------------------')
-    print(merge_dicts({'a': 1}, {'b': 2}))
+    #print('\nmerge_dicts:\n--------------------')
+    #print(merge_dicts({'a': 1}, {'b': 2}))
 
     #print('\nseven_boom:\n--------------------')
     #print(seven_boom(14))
