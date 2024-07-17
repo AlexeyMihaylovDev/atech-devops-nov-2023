@@ -18,23 +18,23 @@ jobs:
       - name: Trigger Jenkins job
         run: |
           JENKINS_URL="http://100.27.108.130:8080"
-          JENKINS_USER="mjoulani"
+          JENKINS_USER="admin"
           JENKINS_PASSWORD="1234"
           JOB_NAME="kub_jen"
 
           # Fetch Jenkins crumb
-          CRUMB_RESPONSE=$(curl -u "$JENKINS_USER:$JENKINS_PASSWORD" -s "$JENKINS_URL/crumbIssuer/api/json")
+          CRUMB_RESPONSE=$(curl -u "$JENKINS_USER:$JENKINS_PASSWORD" -s --retry 3 --retry-delay 10 "$JENKINS_URL/crumbIssuer/api/json")
           echo "Crumb response: $CRUMB_RESPONSE"
 
-          if echo "$CRUMB_RESPONSE" | jq . > /dev/null 2>&1; then
-            CRUMB=$(echo "$CRUMB_RESPONSE" | jq -r '.crumbRequestField + ":" + .crumb')
-            echo "Crumb: $CRUMB"
+          # Parse crumb from response
+          CRUMB=$(echo "$CRUMB_RESPONSE" | jq -r '.crumb')
 
-            # Trigger Jenkins job
-            curl -X POST "$JENKINS_URL/job/$JOB_NAME/build" \
-                 --user "$JENKINS_USER:$JENKINS_PASSWORD" \
-                 -H "$CRUMB"
-          else
-            echo "Failed to parse crumb response as JSON"
+          if [ -z "$CRUMB" ]; then
+            echo "Failed to fetch Jenkins crumb."
             exit 1
           fi
+
+          # Trigger Jenkins job with crumb
+          curl -X POST "$JENKINS_URL/job/$JOB_NAME/build" \
+               --user "$JENKINS_USER:$JENKINS_PASSWORD" \
+               -H "Jenkins-Crumb:$CRUMB"
