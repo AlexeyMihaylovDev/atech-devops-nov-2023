@@ -18,7 +18,7 @@ jobs:
       - name: Trigger Jenkins job
         run: |
           JENKINS_URL="http://100.27.108.130:8080"
-          JENKINS_USER="admin"
+          JENKINS_USER="mjoulani"
           JENKINS_PASSWORD="1234"
           JOB_NAME="kub_jen"
 
