@@ -16,5 +16,15 @@ jobs:
           JENKINS_USER="admin"
           JENKINS_PASSWORD="1234"
           JOB_NAME="kub_jen"
+
+          # Fetch Jenkins crumb
           CRUMB=$(curl -s "$JENKINS_URL/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,\":\",//crumb)" --user "$JENKINS_USER:$JENKINS_PASSWORD")
-          curl -X POST "$JENKINS_URL/job/$JOB_NAME/build" --user "$JENKINS_USER:$JENKINS_PASSWORD" -H "$CRUMB"
+          
+          # Extract crumb field and value
+          CRUMB_FIELD=$(echo $CRUMB | cut -d: -f1)
+          CRUMB_VALUE=$(echo $CRUMB | cut -d: -f2)
+          
+          # Trigger Jenkins job
+          curl -X POST "$JENKINS_URL/job/$JOB_NAME/build" \
+               --user "$JENKINS_USER:$JENKINS_PASSWORD" \
+               -H "$CRUMB_FIELD:$CRUMB_VALUE"
