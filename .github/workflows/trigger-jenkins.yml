@@ -23,11 +23,7 @@ jobs:
           JOB_NAME="kub_jen"
 
           # Fetch Jenkins crumb
-          CRUMB_RESPONSE=$(curl -u "$JENKINS_USER:$JENKINS_PASSWORD" -s --retry 3 --retry-delay 10 "$JENKINS_URL/crumbIssuer/api/json")
-          echo "Crumb response: $CRUMB_RESPONSE"
-
-          # Parse crumb from response
-          CRUMB=$(echo "$CRUMB_RESPONSE" | jq -r '.crumb')
+          CRUMB="a1829b09192e515296343dc8893453ec26bde5938a9a31b25ebb491d68ba9a47"
 
           if [ -z "$CRUMB" ]; then
             echo "Failed to fetch Jenkins crumb."
