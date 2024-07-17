@@ -1,0 +1,20 @@
+name: Trigger Jenkins on Push
+
+on:
+  push:
+    branches:
+      - muhamed_joulani_final_project
+
+jobs:
+  trigger_jenkins_job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Trigger Jenkins job
+        run: |
+          JENKINS_URL="http://100.27.108.130:8080"
+          JENKINS_USER="admin"
+          JENKINS_PASSWORD="1234"
+          JOB_NAME="kub_jen"
+          CRUMB=$(curl -s "$JENKINS_URL/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,\":\",//crumb)" --user "$JENKINS_USER:$JENKINS_PASSWORD")
+          curl -X POST "$JENKINS_URL/job/$JOB_NAME/build" --user "$JENKINS_USER:$JENKINS_PASSWORD" -H "$CRUMB"
