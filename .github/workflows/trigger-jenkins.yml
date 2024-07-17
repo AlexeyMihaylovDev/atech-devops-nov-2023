@@ -22,8 +22,15 @@ jobs:
           JENKINS_PASSWORD="1234"
           JOB_NAME="kub_jen"
 
+          # Function to fetch Jenkins crumb with retry logic
+          fetch_crumb() {
+            local CRUMB_RESPONSE
+            CRUMB_RESPONSE=$(curl -u "$JENKINS_USER:$JENKINS_PASSWORD" -s --retry 3 --retry-delay 10 "$JENKINS_URL/crumbIssuer/api/json")
+            echo "$CRUMB_RESPONSE"
+          }
+
           # Fetch Jenkins crumb
-          CRUMB="a1829b09192e515296343dc8893453ec26bde5938a9a31b25ebb491d68ba9a47"
+          CRUMB=$(fetch_crumb | jq -r '.crumb')
 
           if [ -z "$CRUMB" ]; then
             echo "Failed to fetch Jenkins crumb."
