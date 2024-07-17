@@ -20,7 +20,7 @@ jobs:
           JENKINS_URL="http://100.27.108.130:8080"
           JENKINS_USER="mjoulani"
           JENKINS_PASSWORD="1234"
-          JOB_NAME="kub_jen"
+          JOB_NAME="kube_jen"
 
           # Function to fetch Jenkins crumb with retry logic
           fetch_crumb() {
