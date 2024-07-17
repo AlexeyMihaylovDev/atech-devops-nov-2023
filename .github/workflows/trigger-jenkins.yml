@@ -24,7 +24,7 @@ jobs:
         env:
           JENKINS_URL: http://100.27.108.130:8080
           JENKINS_USER: mjoulani
-          JENKINS_PASSWORD: 1200
+          JENKINS_PASSWORD: 1234
           #JENKINS_PASSWORD: ${{ secrets.JENKINS_PASSWORD }}  # Make sure to store Jenkins password securely in GitHub Secrets
           JOB_NAME: kube_jen
         run: |
