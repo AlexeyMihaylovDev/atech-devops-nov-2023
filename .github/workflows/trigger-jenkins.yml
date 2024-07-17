@@ -18,13 +18,13 @@ jobs:
           JOB_NAME="kub_jen"
 
           # Fetch Jenkins crumb
-          CRUMB=$(curl -s "$JENKINS_URL/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,\":\",//crumb)" --user "$JENKINS_USER:$JENKINS_PASSWORD")
-          
+          CRUMB=$(curl -u "$JENKINS_USER:$JENKINS_PASSWORD" -s "$JENKINS_URL/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,\":\",//crumb)")
+
           # Extract crumb field and value
-          CRUMB_FIELD=$(echo $CRUMB | cut -d: -f1)
-          CRUMB_VALUE=$(echo $CRUMB | cut -d: -f2)
-          
+          CRUMB_FIELD=$(echo $CRUMB | cut -d':' -f1)
+          CRUMB_VALUE=$(echo $CRUMB | cut -d':' -f2)
+
           # Trigger Jenkins job
           curl -X POST "$JENKINS_URL/job/$JOB_NAME/build" \
                --user "$JENKINS_USER:$JENKINS_PASSWORD" \
-               -H "$CRUMB_FIELD:$CRUMB_VALUE"
+               -H "$CRUMB_FIELD: $CRUMB_VALUE"
