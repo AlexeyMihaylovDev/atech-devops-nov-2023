@@ -10,6 +10,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Install curl and jq
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y curl jq
+
       - name: Trigger Jenkins job
         run: |
           JENKINS_URL="http://100.27.108.130:8080"
@@ -18,13 +23,9 @@ jobs:
           JOB_NAME="kub_jen"
 
           # Fetch Jenkins crumb
-          CRUMB=$(curl -u "$JENKINS_USER:$JENKINS_PASSWORD" -s "$JENKINS_URL/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,\":\",//crumb)")
-
-          # Extract crumb field and value
-          CRUMB_FIELD=$(echo $CRUMB | cut -d':' -f1)
-          CRUMB_VALUE=$(echo $CRUMB | cut -d':' -f2)
+          CRUMB=$(curl -u "$JENKINS_USER:$JENKINS_PASSWORD" -s "$JENKINS_URL/crumbIssuer/api/json" | jq -r '.crumbRequestField + ":" + .crumb')
 
           # Trigger Jenkins job
           curl -X POST "$JENKINS_URL/job/$JOB_NAME/build" \
                --user "$JENKINS_USER:$JENKINS_PASSWORD" \
-               -H "$CRUMB_FIELD: $CRUMB_VALUE"
+               -H "$CRUMB"
