@@ -93,6 +93,21 @@ chmod +x trivy.sh
 
 trivy  --version
 
-ubuntu@ip-172-31-28-15:/var/lib/jenkins$
+ubuntu@ip-172-31-28-15:/var/lib/jenkins
+
+some permission for jenkins:
+sudo mkdir -p /home/ubuntu/trivy-report/
+sudo chown jenkins:jenkins /home/ubuntu/trivy-report/
+echo 'Copying trivy report...'
+sh 'sudo cp trivy-report.json /home/ubuntu/trivy-report/'
+
+when jenkins run the job we  want to prevent for asking sudo password:
+sudo visudo
+add this command in the end of the file :
+<process_user> ALL=(ALL)NOPASSWD:ALL
+ps aux | grep jenkins
+jenkins ALL=(ALL) NOPASSWD:ALL
+
+
 
 

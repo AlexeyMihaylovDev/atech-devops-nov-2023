@@ -452,3 +452,16 @@ password: prom-operator
 http://muh-promethues.atech-bot.click:9090/
 
 Kubernetes EKS Cluster (Prometheus)
+
+
+aws ec2:
+find Leinster:
+netstat -tuln
+
+prometheus
+52.201.178.63:9090
+grafan
+52.201.178.63:3000
+blackbox_exporter
+52.201.178.63:9115
+
