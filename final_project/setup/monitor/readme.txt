@@ -447,7 +447,7 @@ https://www.coachdevops.com/2022/05/how-to-setup-monitoring-on-kubernetes.html
 
 muh-grafan.atech-bot.click
 UserName: admin
-password: 1234
+password: prom-operator
 
 http://muh-promethues.atech-bot.click:9090/
 

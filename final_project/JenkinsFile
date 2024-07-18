@@ -185,7 +185,7 @@ pipeline {
                                 git config user.email "muhamed_joulani@hotmail.com"
                                 git config user.name "mjoulani"
                                 git add muh_bot.yaml
-                                git commit -m "update deployment images to version ${polybotImage1} and ${yolo5Image1}"
+                                git commit -m "[Jenkins] update deployment images to version ${polybotImage1} and ${yolo5Image1}"
                                 git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/AlexeyMihaylovDev/atech-devops-nov-2023.git HEAD:muhamed_joulani_final_project
                             """
                         }

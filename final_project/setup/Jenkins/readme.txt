@@ -93,3 +93,6 @@ chmod +x trivy.sh
 
 trivy  --version
 
+ubuntu@ip-172-31-28-15:/var/lib/jenkins$
+
+
