@@ -60,6 +60,11 @@ pipeline {
                             def trivyOutput = sh(script: 'trivy fs . --format json', returnStdout: true).trim()
                             // Generate Trivy scan report
                             sh 'echo "${trivyOutput}" > trivy-report.json'
+                            sh 'ls -l trivy-report.json'
+                            sh 'chmod +r trivy-report.json'
+                            echo 'Copying trivy report...'
+                            // Save Trivy report to /home/ubuntu/trivy-report
+                            sh 'sudo cp trivy-report.json /home/ubuntu/trivy-report/'
                         } catch (Exception e) {
                             echo "Trivy scan issues detected"
                             echo e.getMessage()
@@ -134,6 +139,8 @@ pipeline {
             steps {
                 script {
                     sh "trivy image ${env.POLYBOT_IMAGE} --format json --output polybot-image-trivy-report.json"
+                    // Save Polybot Trivy report to /home/ubuntu/trivy-report
+                    sh 'sudo cp polybot-image-trivy-report.json /home/ubuntu/trivy-report/'
                 }
             }
             post {
@@ -147,6 +154,8 @@ pipeline {
             steps {
                 script {
                     sh "trivy image ${env.YOLO5_IMAGE} --format json --output yolo5-image-trivy-report.json"
+                    // Save Yolo5 Trivy report to /home/ubuntu/trivy-report
+                    sh 'sudo cp yolo5-image-trivy-report.json /home/ubuntu/trivy-report/'
                 }
             }
             post {
