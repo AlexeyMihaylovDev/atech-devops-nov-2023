@@ -10,5 +10,5 @@ spec:
   storageClassName: "gp3"
   persistentVolumeReclaimPolicy: Retain
   awsElasticBlockStore:
-    volumeID: vol-09421acaabc6487b0
+    volumeID: vol-07d3e73d411fc7dc5
     fsType: ext4

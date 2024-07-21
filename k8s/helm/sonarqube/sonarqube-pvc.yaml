@@ -3,7 +3,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: postgresql-pvc
-  namespace: sonar
+  namespace: sonarqube
 spec:
   storageClassName: "gp3"
   accessModes:
