@@ -1,8 +1,20 @@
 service:
-  type: ClisterIP
+  type: ClusterIP
   metadata:
     name: grafana-service
 adminUser: admin
 adminPassword: secret
 
-replicas: 2
+replicas: 1
+
+persistence:
+  type: pvc
+  enabled: true
+  storageClassName: "gp3"
+  accessModes:
+    - ReadWriteOnce
+  size: 15Gi
+  # annotations: {}
+  existingClaim: grafana-pvc
+
+
