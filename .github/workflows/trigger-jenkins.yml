@@ -31,15 +31,15 @@ jobs:
         source venv/bin/activate
         pip install flake8
         # Specify your Python code directories here
-        flake8 ./playbot/app.py ./playbot/app.py ./yolo5/app.py --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+        flake8 final_project/playbot/app.py ./playbot/bot.py final_projrct/yolo5/app.py --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
 
-    #   run: |
     #     source venv/bin/activate
     #     pip install pytest
     #     pytest
 
     - name: Install Java (required for Jenkins CLI)
       # - name: Run Unit Tests
+      #   run: |
       run: |
         sudo apt-get update
         sudo apt-get install -y default-jre
