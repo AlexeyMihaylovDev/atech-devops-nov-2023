@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: polybot-yolo5-service
+  namespace: ahmad-baloum
+spec:
+  selector:
+    app: polybot-yolo5
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8443

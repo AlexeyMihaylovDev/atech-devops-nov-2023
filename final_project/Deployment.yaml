@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: polybot-yolo5
+  namespace: ahmad-baloum
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: polybot-yolo5
+  template:
+    metadata:
+      labels:
+        app: polybot-yolo5
+    spec:
+      containers:
+      - name: polybot
+        image: your-docker-image-for-polybot:latest
+        ports:
+        - containerPort: 8443
+        env:
+        - name: WEBHOOK_URL
+          value: "http://localhost:8443"
+        - name: AWS_REGION
+          value: "your-aws-region"
+        - name: BUCKET_NAME
+          value: "your-bucket-name"
+        - name: SQS_QUEUE_NAME
+          value: "your-sqs-queue-name"
+      - name: yolo5
+        image: your-docker-image-for-yolo5:latest
+        ports:
+        - containerPort: 5000
+        env:
+        - name: BUCKET_NAME
+          value: "your-bucket-name"
+        - name: SQS_QUEUE_NAME
+          value: "your-sqs-queue-name"
