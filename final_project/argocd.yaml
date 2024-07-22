@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: mjoulani-app
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io/mjoulani-app
+  annotations:
+    argocd.argoproj.io/sync-options: Prune=true
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/AlexeyMihaylovDev/atech-devops-nov-2023.git'
+    path: final_project/argo-deploy/
+    targetRevision: muhamed_joulani_final_project
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: mjoulani
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+
+
