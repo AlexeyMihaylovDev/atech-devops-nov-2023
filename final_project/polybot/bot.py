@@ -42,9 +42,9 @@ class Bot:
                 self.telegram_bot_client.send_photo(chat_id, photo=photo_file)
                 photo_file.close()
         except Exception as e:
-            logger.error(f'Error sending photo: {e}')
+            logger.error(f'Uploading Photo Failed: {e}')
         else:
-             logger.info(f'Successfully sent photo to chat ID {chat_id}')
+             logger.info(f'Photo Successfully Uploaded, chat ID: {chat_id}')
         return None
 
 
