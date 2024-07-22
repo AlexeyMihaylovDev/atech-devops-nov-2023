@@ -40,45 +40,6 @@ pipeline {
                 }
             }
         }
-        stage('Trivy Scan') {
-            steps {
-                dir('./final_project') {
-                    echo 'Running Trivy scan on the final_project directory'
-                    script {
-                        try {
-                            // Download and install Trivy
-                            sh '''
-                                if ! command -v trivy > /dev/null; then
-                                    echo "Trivy not found, installing..."
-                                    wget https://github.com/aquasecurity/trivy/releases/download/v${TRIVY_VERSION}/trivy_${TRIVY_VERSION}_Linux-x86_64.tar.gz
-                                    tar zxvf trivy_${TRIVY_VERSION}_Linux-x86_64.tar.gz
-                                    sudo mv trivy /usr/local/bin/
-                                    rm trivy_${TRIVY_VERSION}_Linux-x86_64.tar.gz
-                                fi
-                            '''
-                            // Run Trivy scan and capture the output
-                            def trivyOutput = sh(script: 'trivy fs . --format json', returnStdout: true).trim()
-                            // Generate Trivy scan report
-                            sh 'echo "${trivyOutput}" > trivy-report.json'
-                            sh 'ls -l trivy-report.json'
-                            sh 'chmod +r trivy-report.json'
-                            echo 'Copying trivy report...'
-                            // Save Trivy report to /home/ubuntu/trivy-report
-                            sh 'sudo cp trivy-report.json /home/ubuntu/trivy-report/'
-                        } catch (Exception e) {
-                            echo "Trivy scan issues detected"
-                            echo e.getMessage()
-                        }
-                    }
-                }
-            }
-            post {
-                always {
-                    archiveArtifacts artifacts: 'final_project/trivy-report.json', allowEmptyArchive: true
-                    echo 'Trivy report generated and available in Jenkins artifacts'
-                }
-            }
-        }
         stage('SonarQube Analysis') {
             steps {
                 dir('./final_project') {
@@ -132,36 +93,6 @@ pipeline {
                         }
                     }
                     env.YOLO5_IMAGE = yolo5Image
-                }
-            }
-        }
-        stage('Docker image polybot scan with Trivy') {
-            steps {
-                script {
-                    sh "trivy image ${env.POLYBOT_IMAGE} --format json --output polybot-image-trivy-report.json"
-                    // Save Polybot Trivy report to /home/ubuntu/trivy-report
-                    sh 'sudo cp polybot-image-trivy-report.json /home/ubuntu/trivy-report/'
-                }
-            }
-            post {
-                always {
-                    archiveArtifacts artifacts: 'final_project/polybot/polybot-image-trivy-report.json', allowEmptyArchive: true
-                    echo 'Polybot Docker image Trivy report generated and available in Jenkins artifacts'
-                }
-            }
-        }
-        stage('Docker image yolo5 scan with Trivy') {
-            steps {
-                script {
-                    sh "trivy image ${env.YOLO5_IMAGE} --format json --output yolo5-image-trivy-report.json"
-                    // Save Yolo5 Trivy report to /home/ubuntu/trivy-report
-                    sh 'sudo cp yolo5-image-trivy-report.json /home/ubuntu/trivy-report/'
-                }
-            }
-            post {
-                always {
-                    archiveArtifacts artifacts: 'final_project/yolo5/yolo5-image-trivy-report.json', allowEmptyArchive: true
-                    echo 'Yolo5 Docker image Trivy report generated and available in Jenkins artifacts'
                 }
             }
         }
