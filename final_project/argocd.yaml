@@ -4,7 +4,6 @@ metadata:
   name: mjoulani-application
   namespace: argocd
   finalizers:
-  - resources-finalizer.argocd.argoproj.io/mjoulani-app
   annotations:
     argocd.argoproj.io/sync-options: Prune=true
 spec:
