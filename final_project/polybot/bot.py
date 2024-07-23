@@ -8,7 +8,7 @@ from telebot.types import InputFile
 
 bucket_name = os.environ["SQS_QUEUE_NAME"]
 queue_name = os.environ['BUCKET_NAME']
-region_name = os.environ['region_name']
+region_name = "ap-northeast-2"
 
 
 class Bot:

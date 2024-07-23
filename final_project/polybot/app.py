@@ -16,7 +16,7 @@ from collections import Counter
 app = flask.Flask(__name__)
 
 TELEGRAM_APP_URL = os.environ['WEBHOOK_URL']
-region_name= os.environ['AWS_REGION']
+region_name= "ap-northeast-2"
 
 def get_secret():
     secret_name = "telegram-polybot-token"
