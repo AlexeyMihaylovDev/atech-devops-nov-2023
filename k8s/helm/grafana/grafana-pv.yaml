@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: sonar-pv
+  name: grafana-pv
 spec:
   capacity:
     storage: 30Gi
@@ -10,5 +10,5 @@ spec:
   storageClassName: "gp3"
   persistentVolumeReclaimPolicy: Retain
   awsElasticBlockStore:
-    volumeID: vol-07d3e73d411fc7dc5
+    volumeID: vol-09573840d0a582319
     fsType: ext4

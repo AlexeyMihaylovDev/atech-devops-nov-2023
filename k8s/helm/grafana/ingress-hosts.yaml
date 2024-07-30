@@ -1,8 +1,8 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: sonarqube-ingress
-  namespace: sonarqube
+  name: grafana-ingress
+  namespace: grafana
   annotations:
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
     nginx.ingress.kubernetes.io/rewrite-target: /
@@ -15,17 +15,17 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: sonarqube.atech-bot.click
+  - host: grafana-atech.atech-bot.click
     http:
       paths:
       - pathType: Prefix
         path: /
         backend:
           service:
-            name: sonarqube-sonarqube
+            name: grafana
             port:
-              number: 9000
+              number: 3000
   tls:
   - hosts:
-    - sonarqube.atech-bot.click
-    secretName: sonarqube-tls
+    - grafana-atech.atech-bot.click
+    secretName: grafana-tls

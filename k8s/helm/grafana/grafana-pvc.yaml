@@ -2,12 +2,13 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: postgresql-pvc
-  namespace: sonarqube
+  name: grafana-pvc
+  namespace: grafana
 spec:
   storageClassName: "gp3"
+  existingClaim: grafana-pvc
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 28Gi
+      storage: 30Gi
