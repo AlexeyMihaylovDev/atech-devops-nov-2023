@@ -152,3 +152,18 @@ pipeline {
         }
     }
 }
+
+
+auto
+iface lo inet loopback
+
+auto vmbr0 inet static
+        address 192.168.68.151/24
+        netmask 255.255.255.0
+        gateway 192.168.68.1
+        bridge-ports wlp2s0
+        bridge-stp off
+        bridge-fd 0
+iface wlp2s0 inet muhamed_joulani_final_project
+
+sources /etc/network/interfaces.d/*
