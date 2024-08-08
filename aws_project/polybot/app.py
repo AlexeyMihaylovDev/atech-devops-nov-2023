@@ -50,7 +50,7 @@ def webhook():
     bot.handle_message(req['message'])
     return 'Ok'
 
-@app.route(f'/results/', methods=['GET'])
+@app.route(f'/results/', methods=['GET', 'POST'])
 def results():
     prediction_id = request.args.get('predictionId')
 
@@ -59,7 +59,7 @@ def results():
     table = dynamodb.Table('Qasem-DB')
     response = table.get_item(
         Key={
-            'polybot': prediction_id
+            'prediction_id': prediction_id
         }
     )
     logger.info(f'results: {response}')
