@@ -109,7 +109,7 @@ def consume():
                     table = dynamodb.Table('Qasem-DB')
                     table.put_item(
                         Item={
-                            'polybot': prediction_id,
+                            'Polybot': prediction_id,
                             'prediction_id': prediction_id,
                             'original_img_path': original_img_path,
                             'chat_id': chat_id,
