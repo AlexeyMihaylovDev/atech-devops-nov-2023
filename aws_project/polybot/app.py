@@ -36,7 +36,7 @@ def get_secret():
 
 TELEGRAM_TOKEN = get_secret()
 
-TELEGRAM_APP_URL = "http://Qasem-ALB-1805700592.us-east-2.elb.amazonaws.com"
+TELEGRAM_APP_URL = "https://Qasem-ALB-1805700592.us-east-2.elb.amazonaws.com"
 
 
 @app.route('/', methods=['GET'])
