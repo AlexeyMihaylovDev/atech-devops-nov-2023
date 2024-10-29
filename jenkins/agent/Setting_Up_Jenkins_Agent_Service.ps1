@@ -37,3 +37,4 @@ $xmlContent | Set-Content -Path $xmlConfigPath
 & $winSWExe start
 
 Write-Host "Jenkins Agent has been installed as a service and started."
+
