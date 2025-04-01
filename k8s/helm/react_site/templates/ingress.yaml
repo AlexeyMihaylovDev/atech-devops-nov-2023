@@ -15,16 +15,16 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: {{ .Values.ingress.host }}
+    - host: {{ .Values.ingress.host }}
       paths:
-      - pathType: Prefix
-        path: /
-        backend:
-          service:
-            name: {{ .Values.releaseName }}-service
-            port:
-              number: 80
+        - pathType: Prefix
+          path: /
+          backend:
+            service:
+              name: {{ .Values.releaseName }}-service
+              port:
+                number: 80
   tls:
-  - hosts:
-    - {{ .Values.ingress.host }}
-    secretName: {{ .Values.releaseName }}-tls
+    - hosts:
+        - {{ .Values.ingress.host }}
+      secretName: {{ .Values.releaseName }}-tls
